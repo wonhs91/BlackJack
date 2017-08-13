@@ -32,6 +32,11 @@ public class BlackJackPlay {
 
         //TODO: maybe add dealer checking his face card
         if (dealer.getHand().getValue() == BlackJackConstants.BLACKJACK_VALUE){
+            for (Iterator<Player> iter = players.iterator(); iter.hasNext();){
+                Player player = iter.next();
+                player.lose();
+            }
+        }
 
         }
 
