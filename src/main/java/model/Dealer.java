@@ -13,6 +13,10 @@ public class Dealer {
     private Shoe shoe;
     //TODO: Dealer Strategy
 
+    public Dealer(Shoe shoe){
+        this.shoe = shoe;
+    }
+
     public Shoe getShoe() {
         return shoe;
     }

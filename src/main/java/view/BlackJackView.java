@@ -123,4 +123,9 @@ public class BlackJackView {
         return dealerSettingsHmap;
     }
 
+    public static double askBetAmount(String playerName){
+        double betAmount = askAndGetDouble("bet amount for " + playerName);
+        return betAmount;
+    }
+
 }

@@ -13,20 +13,14 @@ public class Shoe {
 
 	// TODO: track number of each cards (ex. how many 10's left, ace's left ...)
 
-	public Shoe(int numDecks){
+	public Shoe(int numDecks, double shufflePoint){
 		this.shoe = createShoe(numDecks);
-	}
-
-	public Shoe(Stack<Card> shoe){
-		this.shoe = shoe;
+		this.shufflePoint = shufflePoint;
+		origNumDecks = numDecks;
 	}
 
 	public int getOrigNumDecks() {
 		return origNumDecks;
-	}
-
-	public void setOrigNumDecks(int numDecks) {
-		this.origNumDecks = numDecks;
 	}
 
 	public Stack<Card> getShoe() {
@@ -76,4 +70,5 @@ public class Shoe {
 
 		return tempShoe;
 	}
+
 }

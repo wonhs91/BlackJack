@@ -1,8 +1,8 @@
 package main.java;
 
+import main.java.Controller.BlackJackPlay;
 import main.java.Controller.BlackJackPreparation;
 import main.java.model.Table;
-import main.java.view.BlackJackView;
 
 public class BlackJack {
 
@@ -10,9 +10,11 @@ public class BlackJack {
 
     public void start(){
 
-        Table table  = new Table();
-        BlackJackPreparation blackJackPreparation = new BlackJackPreparation(table);
-        table = blackJackPreparation.prepareTable();
+        BlackJackPreparation blackJackPreparation = new BlackJackPreparation();
+
+        Table table = blackJackPreparation.prepareTable();
+
+        BlackJackPlay blackJackPlay = new BlackJackPlay(table);
 
     }
 

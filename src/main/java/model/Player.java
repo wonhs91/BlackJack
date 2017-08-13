@@ -10,28 +10,30 @@ public class Player {
 	private Hand hand;
 	private Decision decision;
 
-	public String getId() {
-		return id;
+	public Player(String id, String name, double asset){
+		this.id = id;
+		this.name = name;
+		this.asset = asset;
+
+		betAmount = 0;
+		hand = new Hand();
+		decision = Decision.NO_DECISION;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getId() {
+		return id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void changeName(String name) {
 		this.name = name;
 	}
 
 	public Hand getHand() {
 		return hand;
-	}
-
-	public void setHand(Hand hand) {
-		this.hand = hand;
 	}
 
 	public double getBetAmount() {
@@ -56,5 +58,22 @@ public class Player {
 
 	public void setDecision(Decision decision) {
 		this.decision = decision;
+	}
+
+	public void lose(){
+		asset = asset - betAmount;
+	}
+
+	public void win(){
+
+	}
+
+	public void draw(){
+
+	}
+
+	private void reset(){
+		betAmount = 0;
+		hand = null;
 	}
 }

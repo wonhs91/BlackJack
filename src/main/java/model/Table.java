@@ -11,6 +11,11 @@ public class Table {
     private Dealer dealer;
     //TODO: add table rules such as max number of seats etc
 
+    public Table(Collection<Player> players, Dealer dealer){
+        this.players = players;
+        this.dealer = dealer;
+    }
+
     public Collection<Player> getPlayers() {
         return players;
     }
