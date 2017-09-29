@@ -1,5 +1,9 @@
 package main.java.view;
 
+import main.java.model.Card;
+import main.java.model.Decision;
+import main.java.model.Hand;
+
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -126,6 +130,42 @@ public class BlackJackView {
     public static double askBetAmount(String playerName){
         double betAmount = askAndGetDouble("bet amount for " + playerName);
         return betAmount;
+    }
+
+    public static void showHand(String playerName,Hand hand){
+        System.out.println(playerName + "'s hand: ");
+        for (Card card : hand.getHand()){
+            System.out.printf("| %s %s |",card.getRank(), card.getSuit());
+        }
+        System.out.printf(" (%d)\n", hand.getValue());
+    }
+
+
+
+    public static void showDealerFaceCard(Card card){
+        System.out.printf("Dealer's face card: | %s %s | (%d)\n", card.getRank(), card.getSuit(), card.getValue());
+    }
+
+    public static void showCard(Card card){
+        System.out.printf("| %s %s | (%d)\n", card.getRank(), card.getSuit(), card.getValue());
+    }
+
+    public static void showMessage(String Message){
+        System.out.println(Message);
+    }
+
+    public static Decision askDecision(String playerName){
+
+        while (true){
+            String decisionStr = askAndGetString(playerName + ": decision (Hit, Stand, Split, Double) ").toUpperCase();
+            try {
+                return Decision.valueOf(decisionStr);
+            }
+            catch(IllegalArgumentException e){
+                System.out.println("Decision does not match, please type one of the followings (Hit, Stand, Split, Double)");
+            }
+        }
+
     }
 
 }

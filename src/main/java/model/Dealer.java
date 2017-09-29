@@ -1,20 +1,24 @@
 package main.java.model;
 
+import main.java.constants.BlackJackConstants;
+
 import java.util.Collections;
 import java.util.Stack;
 
 /**
  * Created by stephen on 6/1/17.
  */
-public class Dealer {
+public class Dealer extends CardHolder{
 
-    private Hand hand;
-    private Decision decision;
     private Shoe shoe;
     //TODO: Dealer Strategy
 
     public Dealer(Shoe shoe){
+        this.id = BlackJackConstants.DEALER_ID;
         this.shoe = shoe;
+        this.decision = Decision.NO_DECISION;
+        this.hand = new Hand();
+        this.name = "The Dealer";
     }
 
     public Shoe getShoe() {
@@ -25,32 +29,18 @@ public class Dealer {
         this.shoe = shoe;
     }
 
-    public Hand getHand() {
-        return hand;
-    }
-
-    public void setHand(Hand hand) {
-        this.hand = hand;
-    }
-
-    public Decision getDecision() {
-        return decision;
-    }
-
-    public void setDecision(Decision decision) {
-        this.decision = decision;
-    }
-
-    public void shuffleShoe(){
-
-        Stack<Card> tempShoe = shoe.getShoe();
-        Collections.shuffle(tempShoe);
-
-        shoe.setShoe(tempShoe);
-    }
-
     public Card drawACard(){
         return shoe.getShoe().pop();
     }
 
+    @Override
+    public Decision makeDecision(){
+        Decision tempDecision;
+        if (this.getHand().getValue() < BlackJackConstants.DEALER_STAND_VALUE){
+            tempDecision = Decision.HIT;
+        } else {
+            tempDecision = Decision.STAND;
+        }
+        return tempDecision;
+    }
 }

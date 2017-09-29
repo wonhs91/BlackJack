@@ -1,39 +1,24 @@
 package main.java.model;
 
-public class Player {
+import main.java.constants.BlackJackConstants;
+import main.java.view.BlackJackView;
 
-	private String id;
-	private String name;
+import static main.java.view.BlackJackView.askDecision;
+
+public class Player extends CardHolder{
+
 	private double betAmount;
 	private double asset;
 	//private double netDifference;
-	private Hand hand;
-	private Decision decision;
 
 	public Player(String id, String name, double asset){
 		this.id = id;
-		this.name = name;
+		this.name = name ;
 		this.asset = asset;
 
 		betAmount = 0;
 		hand = new Hand();
 		decision = Decision.NO_DECISION;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void changeName(String name) {
-		this.name = name;
-	}
-
-	public Hand getHand() {
-		return hand;
 	}
 
 	public double getBetAmount() {
@@ -52,28 +37,48 @@ public class Player {
 		this.asset = asset;
 	}
 
-	public Decision getDecision() {
-		return decision;
-	}
-
-	public void setDecision(Decision decision) {
-		this.decision = decision;
+	public boolean betDouble(){
+		if (asset < betAmount * 2){
+			return false;
+		}
+		betAmount = betAmount * 2;
+		return true;
 	}
 
 	public void lose(){
+
+		BlackJackView.showMessage(this.name + " loses!!\n==========================================\n");
 		asset = asset - betAmount;
+		showInfo();
+		reset();
 	}
 
 	public void win(){
-
+		BlackJackView.showMessage(this.name + " wins!!\n==========================================\n");
+		asset = asset + betAmount;
+		showInfo();
+		reset();
 	}
 
 	public void draw(){
+		BlackJackView.showMessage(this.name + " draws!!\n==========================================\n" );
+		showInfo();
+		reset();
+	}
 
+	private void showInfo(){
+		BlackJackView.showMessage("------------------------------------------------------\n" + id + " || " + name + " || " + betAmount + " || " + asset + "------------------------------------------------------");
 	}
 
 	private void reset(){
 		betAmount = 0;
 		hand = null;
+		decision = Decision.NO_DECISION;
+	}
+
+	public Decision makeDecision(){
+		Decision tempDecision = askDecision(this.getName());
+		this.setDecision(tempDecision);
+		return tempDecision;
 	}
 }

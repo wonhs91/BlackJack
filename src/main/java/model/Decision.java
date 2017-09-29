@@ -3,7 +3,6 @@ package main.java.model;
 public enum Decision {
 	NO_DECISION,
 	HIT,
-	FOLD,
 	STAND,
 	SPLIT,
 	DOUBLE;

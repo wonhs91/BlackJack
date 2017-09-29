@@ -2,6 +2,7 @@ package main.java.model;
 
 import main.java.constants.BlackJackConstants;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -13,9 +14,14 @@ public class Hand {
 
     private Collection<Card> hand;
 
-    public void setHand(Collection<Card> hand) {
-        this.hand = hand;
+
+    public Hand(){
+        this.hand = new ArrayList<Card>();
     }
+
+    /*public void setHand(Collection<Card> hand) {
+        this.hand = hand;
+    }*/
 
     public Collection<Card> getHand() {
         return hand;

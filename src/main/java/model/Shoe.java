@@ -2,6 +2,7 @@ package main.java.model;
 
 import main.java.constants.BlackJackConstants;
 
+import java.util.Collections;
 import java.util.Stack;
 
 public class Shoe {
@@ -52,6 +53,19 @@ public class Shoe {
 		return shoe.size();
 	}
 
+	public void repopulateShoe(){
+		this.shoe = createShoe(origNumDecks);
+	}
+
+	public void shuffleShoe(){
+		Collections.shuffle(shoe);
+	}
+
+	public void reShuffleShoe(){
+		repopulateShoe();
+		shuffleShoe();
+	}
+
 	private Stack<Card> createShoe(int numDecks){
 		Stack<Card> tempShoe = new Stack<Card>();
 
@@ -70,5 +84,6 @@ public class Shoe {
 
 		return tempShoe;
 	}
+
 
 }

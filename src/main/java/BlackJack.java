@@ -16,6 +16,8 @@ public class BlackJack {
 
         BlackJackPlay blackJackPlay = new BlackJackPlay(table);
 
+        blackJackPlay.play();
+
     }
 
 }
