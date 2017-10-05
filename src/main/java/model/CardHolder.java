@@ -40,4 +40,10 @@ public abstract class CardHolder {
     }
 
     public abstract Decision makeDecision();
+
+    public void reset(){
+        hand = new Hand();
+        decision = Decision.NO_DECISION;
+    }
+
 }

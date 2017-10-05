@@ -46,7 +46,6 @@ public class Player extends CardHolder{
 	}
 
 	public void lose(){
-
 		BlackJackView.showMessage(this.name + " loses!!\n==========================================\n");
 		asset = asset - betAmount;
 		showInfo();
@@ -66,14 +65,21 @@ public class Player extends CardHolder{
 		reset();
 	}
 
-	private void showInfo(){
-		BlackJackView.showMessage("------------------------------------------------------\n" + id + " || " + name + " || " + betAmount + " || " + asset + "------------------------------------------------------");
+	public void blackJackWin(){
+		BlackJackView.showMessage(this.name + " !! * BLACK JACK * !!\n==========================================\n" );
+		asset = Math.floor(asset + (betAmount * 1.5));
+		showInfo();
+		reset();
 	}
 
-	private void reset(){
+	private void showInfo(){
+		BlackJackView.showMessage("------------------------------------------------------\n" + " id || name || betAmount ||  asset \n" + id + " || " + name + " || " + betAmount + " || " + asset + "\n------------------------------------------------------");
+	}
+
+	@Override
+	public void reset(){
+		super.reset();
 		betAmount = 0;
-		hand = null;
-		decision = Decision.NO_DECISION;
 	}
 
 	public Decision makeDecision(){

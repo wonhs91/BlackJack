@@ -59,39 +59,35 @@ public class BlackJackPlay {
                 //Each Player plays
                 for (Iterator<Player> iter = players.iterator(); iter.hasNext(); ) {
                     Player player = iter.next();
-                    haveTurn(player);
-
-                    //if player Busts
-                    if (player.getHand().getValue() > BlackJackConstants.BLACKJACK_VALUE) {
-                        player.lose();
+                    // player gets blackjack
+                    if (player.getHand().getValue() == BlackJackConstants.BLACKJACK_VALUE){
+                        BlackJackView.showHand(player.getName(), player.getHand());
+                        player.blackJackWin();
+                    }
+                    else {
+                        haveTurn(player);
                     }
                 }
                 //Dealer plays
                 BlackJackView.showHand("Dealer", dealer.getHand());
                 haveTurn(dealer);
                 int dealerHandValue = dealer.getHand().getValue();
-                if (dealerHandValue > BlackJackConstants.BLACKJACK_VALUE) {
-                    for (Iterator<Player> iter = players.iterator(); iter.hasNext(); ) {
-                        Player player = iter.next();
-                        if (player.getHand() != null) {
-                            player.win();
-                        }
-                    }
-                } else {
 
-                    for (Iterator<Player> iter = players.iterator(); iter.hasNext(); ) {
-                        Player player = iter.next();
-                        int playerHandValue = player.getHand().getValue();
-                        if (playerHandValue > dealerHandValue) {
-                            player.win();
-                        } else if (playerHandValue == dealerHandValue) {
-                            player.draw();
-                        } else {
-                            player.lose();
-                        }
+                // settle
+                for (Iterator<Player> iter = players.iterator(); iter.hasNext(); ) {
+                    Player player = iter.next();
+                    int playerHandValue = player.getHand().getValue();
+                    if (playerHandValue < BlackJackConstants.BLACKJACK_VALUE && (playerHandValue > dealerHandValue  ||
+                            dealerHandValue > BlackJackConstants.BLACKJACK_VALUE)) {
+                        player.win();
+                    } else if (playerHandValue == dealerHandValue) {
+                        player.draw();
+                    } else {
+                        player.lose();
                     }
                 }
 
+                dealer.reset();
             }
         }
 
@@ -115,7 +111,6 @@ public class BlackJackPlay {
                     }
                     break;
                 case STAND:
-
                     break;
                 case SPLIT:
                     //TODO
@@ -140,7 +135,18 @@ public class BlackJackPlay {
 
         for (Iterator<Player> iter = players.iterator(); iter.hasNext(); ) {
             Player player = iter.next();
+
+            if (player.getAsset() <= 0) {
+                iter.remove();
+                continue;
+            }
+
             double betAmount = askBetAmount(player.getName());
+            while (player.getBetAmount() > player.getAsset()) {
+                showMessage("The player has not enough asset");
+                betAmount = askBetAmount(player.getName());
+            }
+
             player.setBetAmount(betAmount);
         }
     }

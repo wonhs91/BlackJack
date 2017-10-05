@@ -41,7 +41,7 @@ public class Shoe {
 	}
 
 	public boolean isShufflePointReached(){
-		 double cardLeft = getNumCards() / getOrigNumCards();
+		 double cardLeft = (double) getNumCards() / getOrigNumCards();
 		 return cardLeft <= shufflePoint;
 	}
 

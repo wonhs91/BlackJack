@@ -41,6 +41,7 @@ public class Dealer extends CardHolder{
         } else {
             tempDecision = Decision.STAND;
         }
+        this.decision = tempDecision;
         return tempDecision;
     }
 }
